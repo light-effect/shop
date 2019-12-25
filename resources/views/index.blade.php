@@ -2,6 +2,12 @@
 
 @section('content')
 
-    <h3>Index</h3>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 justify-content-center">
+
+            </div>
+        </div>
+    </div>
 
 @endsection
