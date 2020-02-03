@@ -49,4 +49,19 @@ class ProductController extends BaseController
 
         return redirect('/');
     }
+
+    public function get(int $id)
+    {
+        $product = Product::find($id);
+
+        return view('product.detail', ['product' => $product]);
+    }
+
+    public function search(Request $request)
+    {
+        sleep(5);
+        $products = Product::where('name', 'like', '%' . $request->json()->get('search') . '%')->limit(2)->get();
+
+        return response()->json(['products' => $products]);
+    }
 }

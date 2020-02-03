@@ -78,4 +78,36 @@ class IndexController extends BaseController
 
         return view('category', ['category' => $category]);
     }
+
+    public function curl()
+    {
+        try {
+            $user = User::findByEmail('light-effect@outlook.com');
+        } catch (\Exception $exception) {
+            echo '<pre>';
+            var_dump($exception->getMessage());
+            exit;
+        }
+
+        //var_dump($user); exit;
+
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, 'https://api.nasa.gov/planetary/apod');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, false);
+
+        $result = curl_exec($curl);
+
+        $exchange = json_decode($result);
+
+        echo '<pre>';
+        var_dump($exchange);
+
+        ini_set('max_execution_time', 60);
+
+
+        curl_close($curl);
+    }
 }

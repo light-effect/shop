@@ -20,9 +20,12 @@
                     @endforeach
                 </div>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">USD: покупка/продажа {{\App\Api\Privat::getUsdExchange()->buy}}/{{\App\Api\Privat::getUsdExchange()->sale}}</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search" data-csrf="{{ csrf_token() }}">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         @if (\Illuminate\Support\Facades\Auth::guest() === true)
@@ -37,7 +40,7 @@
         @else
             <ul class="navbar-nav mr-auto float-right">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Hello, {{ \Illuminate\Support\Facades\Auth::user()->first_name }}.</a>
+                    <a class="nav-link" href="{{ url('/basket/index') }}">Hello, {{ \Illuminate\Support\Facades\Auth::user()->first_name }}. (in cart: <span id="count-cart">123</span> items)</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
